@@ -1,0 +1,543 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================================
+   DESIGN SYSTEM — Ink & Ember
+   ================================================ */
+:root {
+  --bg-primary:    #0B0E14;
+  --bg-secondary:  #12151C;
+  --bg-tertiary:   #1A1E27;
+  --text-primary:  #F3EFE7;
+  --text-secondary:#A6ADBB;
+  --accent-primary:#E8A33D;
+  --accent-secondary:#5FA8A0;
+  --border:        #2A2F3A;
+  --success:       #6FCF97;
+  /* Used by JS to detect reduced-motion in TS components */
+  --motion-ok: 1;
+}
+
+/* ================================================
+   REDUCED MOTION — Accessibility
+   Disables ALL decorative animation for users
+   who have set "reduce motion" in their OS/browser.
+   This covers CSS keyframes, transitions, and
+   exposes --motion-ok: 0 for JS/Framer Motion.
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-ok: 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep layout transitions so focus-ring / reveal still shifts,
+     but strip all decorative looping keyframes */
+  .cursor-blink,
+  .animate-pulse,
+  .animate-spin {
+    animation: none !important;
+  }
+}
+
+
+/* ================================================
+   BASE RESET & GLOBAL
+   ================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ================================================
+   TYPOGRAPHY
+   ================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* ================================================
+   SCROLLBAR STYLING
+   ================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* ================================================
+   HERO NOISE TEXTURE
+   ================================================ */
+.hero-noise {
+  position: relative;
+}
+.hero-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+}
+
+/* subtle diagonal grid behind hero */
+.hero-grid {
+  position: relative;
+}
+.hero-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(232, 163, 61, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 163, 61, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================
+   CARD STYLES
+   ================================================ */
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(232, 163, 61, 0.35);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 0 24px rgba(232, 163, 61, 0.08);
+}
+
+/* ================================================
+   KICKER LABEL
+   ================================================ */
+.kicker {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+/* ================================================
+   SECTION HEADING
+   ================================================ */
+.section-heading {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+/* ================================================
+   BUTTONS
+   ================================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-primary);
+  color: #0B0E14;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 12px 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 24px rgba(232, 163, 61, 0.45);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--accent-primary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 11px 28px;
+  border-radius: 8px;
+  border: 1.5px solid var(--accent-primary);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-outline:hover {
+  background: var(--accent-primary);
+  color: #0B0E14;
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(232, 163, 61, 0.35);
+}
+
+.btn-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--accent-primary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1.5px solid var(--accent-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+.btn-resume:hover {
+  background: var(--accent-primary);
+  color: #0B0E14;
+  box-shadow: 0 0 16px rgba(232, 163, 61, 0.4);
+}
+
+/* ================================================
+   SKILL CHIP / TAG
+   ================================================ */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.skill-chip:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: rgba(232, 163, 61, 0.05);
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(95, 168, 160, 0.12);
+  color: var(--accent-secondary);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(95, 168, 160, 0.25);
+}
+
+/* ================================================
+   TIMELINE
+   ================================================ */
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(232, 163, 61, 0.15);
+  flex-shrink: 0;
+}
+
+/* ================================================
+   SOCIAL ICON BUTTON
+   ================================================ */
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.social-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: rgba(232, 163, 61, 0.08);
+  box-shadow: 0 0 16px rgba(232, 163, 61, 0.2);
+}
+
+/* ================================================
+   FORM INPUTS
+   ================================================ */
+.form-input {
+  width: 100%;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: none;
+}
+.form-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+.form-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(232, 163, 61, 0.12);
+}
+
+/* ================================================
+   EMBLA CAROUSEL
+   ================================================ */
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  gap: 24px;
+}
+.embla__slide {
+  flex: 0 0 auto;
+}
+
+/* Dot indicators */
+.embla-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.2s, width 0.2s;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+.embla-dot--active {
+  background: var(--accent-primary);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ================================================
+   TYPING CURSOR
+   ================================================ */
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--accent-primary);
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ================================================
+   AMBER TEXT HIGHLIGHT (gradient)
+   ================================================ */
+.text-amber-gradient {
+  background: linear-gradient(135deg, #E8A33D 0%, #F0C070 50%, #E8A33D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ================================================
+   SECTION PADDING
+   ================================================ */
+.section-padding {
+  padding: 96px 0;
+}
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 64px 0;
+  }
+}
+
+/* ================================================
+   BLOB CLIP PATH FOR PROFILE PHOTO
+   ================================================ */
+.blob-clip {
+  clip-path: polygon(
+    30% 0%, 70% 0%,
+    100% 30%, 100% 70%,
+    70% 100%, 30% 100%,
+    0% 70%, 0% 30%
+  );
+}
+
+/* ================================================
+   PROJECT CARD GRADIENT OVERLAY
+   ================================================ */
+.project-img-overlay {
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(11, 14, 20, 0.85) 100%
+  );
+}
+
+/* ================================================
+   SCROLL REVEAL BASE
+   ================================================ */
+.reveal-base {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.reveal-base.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================================
+   ACTIVE NAV STYLES
+   ================================================ */
+.nav-link {
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: var(--accent-primary);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+.nav-link:hover {
+  color: var(--text-primary);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+.nav-link.active {
+  color: var(--accent-primary);
+}
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* ================================================
+   GLOW EFFECTS
+   ================================================ */
+.amber-glow {
+  filter: drop-shadow(0 0 20px rgba(232, 163, 61, 0.35));
+}
+
+/* ================================================
+   STAT CARD
+   ================================================ */
+.stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 24px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: all 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(232, 163, 61, 0.45);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 12px 32px rgba(0,0,0,0.4),
+    0 0 24px rgba(232, 163, 61, 0.08);
+}
+
+/* ================================================
+   FLOATING CHIP (hero background)
+   ================================================ */
+.float-chip {
+  position: absolute;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ================================================
+   TILT CARD WRAPPER
+   ================================================ */
+.tilt-wrapper {
+  perspective: 800px;
+}
