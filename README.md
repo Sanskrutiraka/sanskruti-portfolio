@@ -6,14 +6,8 @@ Built with React + Vite + TypeScript + Tailwind CSS, featuring scroll-driven ani
 ---
 
 ## 🔗 Live Demo
-
-> *(Add your deployed URL here once live on Vercel/Netlify)*
-
----
-
-## 📸 Preview
-
-> *(Add a screenshot or GIF of the hero section here)*
+ 
+👉 **[sanskruti-portfolio-nine.vercel.app](https://sanskruti-portfolio-nine.vercel.app/)**
 
 ---
 
@@ -21,7 +15,7 @@ Built with React + Vite + TypeScript + Tailwind CSS, featuring scroll-driven ani
 
 | Layer | Technology |
 |---|---|
-| Framework | React 18 + Vite 8 |
+| Framework | React 18 + Vite 5 |
 | Language | TypeScript |
 | Styling | Tailwind CSS 3 |
 | Animations | Framer Motion |

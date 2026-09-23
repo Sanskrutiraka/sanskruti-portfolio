@@ -86,7 +86,7 @@ export default function Navbar() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center">
               <a
-                href="/resume.pdf"
+                href="/Docs/Sanskruti Software Engineer Resume.pdf"
                 download
                 className="btn-resume"
               >
@@ -172,7 +172,7 @@ export default function Navbar() {
               {/* Mobile Resume Button */}
               <div className="p-6 border-t" style={{ borderColor: '#2A2F3A' }}>
                 <a
-                  href="/resume.pdf"
+                  href="/Docs/Sanskruti Software Engineer Resume.pdf"
                   download
                   className="btn-outline w-full justify-center"
                 >
