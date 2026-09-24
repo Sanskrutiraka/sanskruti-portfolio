@@ -73,26 +73,26 @@ function StatCard({ value, label, icon, delay }: StatCardProps) {
 -------------------------------------------------------- */
 const stats: StatCardProps[] = [
   {
-    value: '4+',
-    label: 'Production-grade Projects Built (internship + personal)',
+    value: '3+',
+    label: 'Full-Stack & Backend Projects',
     icon: <Code2 size={18} />,
     delay: 0.1,
   },
   {
-    value: '4mo',
-    label: 'Software Development Internship at [Company Name]',
+    value: '3+Months',
+    label: 'Software Development Internship Experience at AmbuGrid System',
     icon: <Briefcase size={18} />,
     delay: 0.2,
   },
   {
-    value: '70%+',
-    label: 'Java Core proficiency with Spring Boot ecosystem mastery',
+    value: '8.75',
+    label: 'MCA CGPA',
     icon: <GraduationCap size={18} />,
     delay: 0.3,
   },
   {
     value: 'Pune',
-    label: 'Open to Pune / Bangalore / Remote — available immediately',
+    label: 'Open to Pune / Bangalore / Pan India Remote — available immediately',
     icon: <MapPin size={18} />,
     delay: 0.4,
   },

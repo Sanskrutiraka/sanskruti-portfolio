@@ -172,7 +172,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              MCA 2026 — from writing my first Java class to shipping
+              MCA 2026 — from writing my first Java code to shipping
               production-grade Spring Boot microservices. I build scalable
               REST APIs, distributed backends, and clean full-stack experiences.
             </motion.p>
@@ -320,21 +320,6 @@ export default function Hero() {
 
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-        >
-          <span className="text-xs font-body" style={{ color: '#2A2F3A', letterSpacing: '0.1em' }}>SCROLL</span>
-          <motion.div
-            className="w-px h-10"
-            style={{ background: 'linear-gradient(to bottom, #2A2F3A, #E8A33D)' }}
-            animate={{ scaleY: [0, 1, 0], opacity: [0, 1, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </motion.div>
       </div>
 
       {/* CSS for rotating ring animation */}

@@ -4,14 +4,14 @@ import { Menu, X, Download } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
-  { label: 'Home',           to: 'home'           },
-  { label: 'About',          to: 'about'          },
-  { label: 'Skills',         to: 'skills'         },
-  { label: 'Projects',       to: 'projects'       },
-  { label: 'Experience',     to: 'experience'     },
-  { label: 'Education',      to: 'education'      },
+  { label: 'Home', to: 'home' },
+  { label: 'About', to: 'about' },
+  { label: 'Skills', to: 'skills' },
+  { label: 'Projects', to: 'projects' },
+  { label: 'Experience', to: 'experience' },
+  { label: 'Education', to: 'education' },
   { label: 'Certifications', to: 'certifications' },
-  { label: 'Contact',        to: 'contact'        },
+  { label: 'Contact', to: 'contact' },
 ]
 
 export default function Navbar() {
@@ -55,7 +55,7 @@ export default function Navbar() {
                 className="w-8 h-8 rounded-lg flex items-center justify-center text-[#0B0E14] font-bold font-heading text-sm"
                 style={{ backgroundColor: '#E8A33D' }}
               >
-                {'<'}
+                {'SR'}
               </span>
               <span
                 className="font-heading font-bold text-sm tracking-tight"

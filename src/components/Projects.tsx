@@ -25,10 +25,10 @@ const projects: Project[] = [
   {
     id: 'civicpulse',
     title: 'CivicPulse+',
-    tagline: 'Multi-service GovTech AI Platform',
+    tagline: 'AI-Powered Smart Grievance Management System',
     description:
-      'A distributed, multi-service government technology platform featuring AI-powered citizen services, real-time data pipelines, and a React dashboard. Built with Spring Boot microservices, FastAPI for AI inference, Kafka for event streaming, and Docker Compose for orchestration.',
-    stack: ['Spring Boot', 'FastAPI', 'React', 'PostgreSQL', 'Redis', 'Kafka', 'Docker'],
+      'Led full-stack development of an AI-powered grievance platform with complaint registration, RBAC/JWT auth, AI-assisted categorization & routing, SLA tracking, audit logs and analytics. Built on Spring Boot microservices, FastAPI for AI, Kafka for event streaming, and Docker Compose.',
+    stack: ['Java', 'Spring Boot', 'FastAPI', 'React', 'PostgreSQL', 'Redis', 'Kafka', 'Docker'],
     github: 'https://github.com/Sanskrutiraka/CivicPulse',
     gradient: 'from-amber-900/40 to-orange-950/40',
     badge: 'Flagship',
@@ -37,10 +37,10 @@ const projects: Project[] = [
   {
     id: 'parkvahan',
     title: 'ParkVahan',
-    tagline: 'Smart Parking Management Platform',
+    tagline: 'Smart Parking & Mobility Management Platform',
     description:
-      'Internship-built smart parking system supporting driver, owner, and guard roles. Features real-time slot tracking, map integration, EV charging station management, and booking flows. Backend powered by Spring Boot + PostgreSQL with a React frontend.',
-    stack: ['Spring Boot', 'PostgreSQL', 'React', 'Maps API', 'JWT Auth'],
+      'Built during internship at AmbuGrid System LLP. Full-stack mobile/web parking platform with driver, owner and guard workflows. Features parking discovery & booking, QR-based entry/exit, vehicle verification, SOS/calling, EV charging flows and notifications.',
+    stack: ['React Native', 'React.js', 'Node.js', 'Express.js', 'Supabase', 'PostgreSQL', 'Razorpay', 'Docker'],
     github: 'https://github.com/Sanskrutiraka/ParkVahan',
     gradient: 'from-teal-900/40 to-cyan-950/40',
     badge: 'Internship',
@@ -51,23 +51,22 @@ const projects: Project[] = [
     title: 'Smart Complaint Router',
     tagline: 'Intelligent Complaint Processing Engine',
     description:
-      'A Java + Spring Boot complaint processing system that automatically categorizes, routes, and escalates complaints using rule-based logic and department scoring. REST APIs with Spring Security, JPA persistence, and Swagger docs.',
-    stack: ['Java', 'Spring Boot', 'Spring Security', 'PostgreSQL', 'Swagger'],
+      'Java + Spring Boot complaint management system with complaint registration, JWT authentication, status tracking, admin/user workflows and automated complaint routing. REST API tested with Postman.',
+    stack: ['Java', 'Spring Boot', 'REST APIs', 'MySQL', 'JWT', 'Postman', 'Git'],
     github: 'https://github.com/Sanskrutiraka/smart-complaint-router',
     gradient: 'from-violet-900/30 to-purple-950/40',
     icon: '🔀',
   },
   {
-    id: 'shopsphere',
-    title: 'ShopSphere',
-    tagline: 'Hackathon E-Commerce Full-Stack App',
+    id: 'focusdo',
+    title: 'FocusDo',
+    tagline: 'Full-Stack To-Do & Task Management App',
     description:
-      'A full-stack e-commerce platform built during a 24-hour hackathon. Features product catalog, cart management, user auth, order tracking, and payment flow. Spring Boot REST backend with a React + Tailwind storefront.',
-    stack: ['Spring Boot', 'React', 'Tailwind CSS', 'MySQL', 'JWT'],
-    github: 'https://github.com/Sanskrutiraka/ShopSphere',
+      'Full-stack to-do application with task management, JWT authentication and user-specific data. React Native frontend backed by Node.js + Express REST API with MongoDB. Deployed on Vercel and Render.',
+    stack: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Zod', 'Vercel', 'Render'],
+    github: 'https://github.com/Sanskrutiraka/FocusDo',
     gradient: 'from-rose-900/30 to-pink-950/40',
-    badge: 'Hackathon',
-    icon: '🛒',
+    icon: '✅',
   },
 ]
 
@@ -220,12 +219,12 @@ function ProjectCard({ project }: { project: Project }) {
                 }}
                 aria-label={`${project.title} Live Demo`}
                 onMouseEnter={e => {
-                  ;(e.currentTarget as HTMLElement).style.background = '#E8A33D'
-                  ;(e.currentTarget as HTMLElement).style.color = '#0B0E14'
+                  ; (e.currentTarget as HTMLElement).style.background = '#E8A33D'
+                    ; (e.currentTarget as HTMLElement).style.color = '#0B0E14'
                 }}
                 onMouseLeave={e => {
-                  ;(e.currentTarget as HTMLElement).style.background = 'rgba(232,163,61,0.12)'
-                  ;(e.currentTarget as HTMLElement).style.color = '#E8A33D'
+                  ; (e.currentTarget as HTMLElement).style.background = 'rgba(232,163,61,0.12)'
+                    ; (e.currentTarget as HTMLElement).style.color = '#E8A33D'
                 }}
               >
                 <ExternalLink size={13} />
@@ -309,7 +308,7 @@ export default function Projects() {
               Things I've <span className="text-amber-gradient">actually built</span>
             </h2>
             <p className="mt-2 text-sm" style={{ color: '#A6ADBB' }}>
-              Auto-scrolls every 3s · hover to pause · drag to browse
+              Drag or use arrows to browse
             </p>
           </div>
 
@@ -355,9 +354,8 @@ export default function Projects() {
             <button
               key={i}
               id={`project-dot-${i}`}
-              className={`embla-dot transition-all duration-300 ${
-                i === selectedIndex ? 'embla-dot--active' : ''
-              }`}
+              className={`embla-dot transition-all duration-300 ${i === selectedIndex ? 'embla-dot--active' : ''
+                }`}
               onClick={() => emblaApi?.scrollTo(i)}
               aria-label={`Go to project ${i + 1}`}
             />

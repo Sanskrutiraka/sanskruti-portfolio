@@ -14,11 +14,11 @@ const experiences = [
     location: 'Pune, MH (Hybrid)',
     type: 'Internship',
     bullets: [
-      'Built and shipped ParkVahan — a full-stack smart parking management platform with Spring Boot REST APIs, role-based access (driver/owner/guard), JWT authentication, and a React dashboard; reduced manual parking-slot lookup time by ~60%.',
-      'Implemented a PostgreSQL-backed slot booking engine with real-time availability tracking and maps integration (geolocation + EV charging overlays), handling concurrent booking with Spring Boot transactional guarantees.',
-      'Collaborated with a team of 4, followed agile sprint cycles, performed code reviews, wrote Swagger/OpenAPI docs, and deployed services via Docker Compose on an on-premise Linux server.',
+      'Worked on ParkVahan — a smart parking & mobility platform — building mobile/web features using React Native, React.js and a Node.js + Express.js REST API backend backed by Supabase PostgreSQL.',
+      'Integrated third-party services including Surepass (vehicle verification), Razorpay (payments), MSG91 (notifications), FCM (push), and Exotel (calling/SOS), handling API integration, documentation and debugging.',
+      'Worked on parking discovery & booking, QR-based entry/exit, parking owner/guard workflows, vehicle registration, EV charging flows, admin/mobile dashboards and deployment-related tasks using Docker, Expo/EAS and Git.',
     ],
-    stack: ['React Native', 'Node.js ', 'Express.js', 'PostgreSQL', 'React', 'Docker', 'JWT', 'Swagger'],
+    stack: ['React Native', 'React.js', 'Node.js', 'Express.js', 'Supabase', 'PostgreSQL', 'Razorpay', 'Docker', 'Expo/EAS', 'Postman', 'Git'],
   },
 ]
 

@@ -21,13 +21,15 @@ const skillGroups: SkillGroup[] = [
     category: 'Backend',
     icon: '⚙️',
     skills: [
-      { name: 'Java 17+',        icon: '☕', accent: true },
+      { name: 'Java',            icon: '☕', accent: true },
       { name: 'Spring Boot',     icon: '🌱', accent: true },
       { name: 'Spring Security', icon: '🔒' },
       { name: 'REST APIs',       icon: '🔌' },
       { name: 'JPA / Hibernate', icon: '🗄️' },
       { name: 'Microservices',   icon: '🏗️' },
-      { name: 'FastAPI',         icon: '⚡' },
+      { name: 'Node.js',         icon: '🟢' },
+      { name: 'Express.js',      icon: '⚡' },
+      { name: 'FastAPI',         icon: '🐍' },
     ],
   },
   {
@@ -36,18 +38,20 @@ const skillGroups: SkillGroup[] = [
     skills: [
       { name: 'PostgreSQL',      icon: '🐘', accent: true },
       { name: 'MySQL',           icon: '🐬' },
+      { name: 'MongoDB',         icon: '🌿' },
+      { name: 'Supabase',        icon: '⚡' },
       { name: 'Redis',           icon: '🔴' },
-      { name: 'JPA Queries',     icon: '📋' },
-      { name: 'DB Migrations',   icon: '🔄' },
+      { name: 'Mongoose / JPA',  icon: '📋' },
     ],
   },
   {
     category: 'Frontend',
     icon: '🎨',
     skills: [
-      { name: 'React',           icon: '⚛️', accent: true },
-      { name: 'TypeScript',      icon: '🟦' },
+      { name: 'React.js',        icon: '⚛️', accent: true },
+      { name: 'React Native',    icon: '📱', accent: true },
       { name: 'JavaScript',      icon: '🟨' },
+      { name: 'TypeScript',      icon: '🟦' },
       { name: 'Tailwind CSS',    icon: '🎨' },
       { name: 'HTML / CSS',      icon: '🌐' },
     ],
@@ -56,12 +60,12 @@ const skillGroups: SkillGroup[] = [
     category: 'Tools & DevOps',
     icon: '🛠️',
     skills: [
-      { name: 'Docker',          icon: '🐳', accent: true },
-      { name: 'Apache Kafka',    icon: '📨' },
-      { name: 'Git / GitHub',    icon: '🔀' },
+      { name: 'Git / GitHub',    icon: '🔀', accent: true },
+      { name: 'Docker',          icon: '🐳' },
       { name: 'Postman',         icon: '📮' },
+      { name: 'Apache Kafka',    icon: '📨' },
+      { name: 'Expo / EAS',      icon: '🚀' },
       { name: 'Maven',           icon: '📦' },
-      { name: 'Linux / CLI',     icon: '🐧' },
     ],
   },
 ]
@@ -180,7 +184,7 @@ export default function Skills() {
             </span>
           </div>
           <div className="flex flex-wrap gap-2">
-            {['Kubernetes', 'AWS (EC2 + S3)', 'gRPC', 'System Design'].map(item => (
+            {['Java 8+ & Multithreading', 'Spring Security', 'SQL & Joins', 'DSA', 'System Design'].map(item => (
               <span key={item} className="tag-chip" style={{ borderColor: 'rgba(111,207,151,0.25)', color: '#6FCF97', background: 'rgba(111,207,151,0.08)' }}>
                 {item}
               </span>

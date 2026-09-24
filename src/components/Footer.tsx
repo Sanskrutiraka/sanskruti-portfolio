@@ -3,7 +3,7 @@
  *  and a copyright line. Mirrors the Navbar's link set.
  */
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, Heart } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 import { Link } from 'react-scroll'
 
 const socials = [
@@ -120,9 +120,18 @@ export default function Footer() {
         >
           <p>© {year} Sanskruti Raka. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
-            Crafted with
-            <Heart size={11} className="inline" style={{ color: '#E8A33D' }} />
-            using React + Vite + TypeScript
+            Designed &amp; Developed by&nbsp;
+            <a
+              href="https://github.com/Sanskrutiraka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 hover:text-amber-400 transition-colors duration-200"
+              style={{ color: '#A6ADBB' }}
+              aria-label="GitHub profile of Sanskrutiraka"
+            >
+              <Github size={13} />
+              Sanskrutiraka
+            </a>
           </p>
         </div>
 
