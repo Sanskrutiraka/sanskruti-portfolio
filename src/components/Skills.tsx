@@ -16,56 +16,63 @@ interface SkillGroup {
   skills: Skill[]
 }
 
+/**
+ * Skills verified against completed implementations:
+ *   - CivicPulse+ (MCA Major Project): Java 17, Spring Boot 3.2, Spring Cloud, Kafka, PostgreSQL, Redis, Docker, FastAPI, React
+ *   - ParkVahan (Internship): React Native, Expo, React, Node.js, Express, Supabase, PostgreSQL, REST APIs
+ *   - Smart Complaint Routing System: Java, Spring Boot, MySQL, REST APIs, Postman
+ *   - ShopSphere (Hackathon): React, Gemini API, Tailwind CSS
+ *   - FocusDo: React Native, Node.js, Express, MongoDB, JWT
+ */
 const skillGroups: SkillGroup[] = [
   {
-    category: 'Backend',
+    category: 'Backend & Microservices',
     icon: '⚙️',
     skills: [
-      { name: 'Java',            icon: '☕', accent: true },
-      { name: 'Spring Boot',     icon: '🌱', accent: true },
-      { name: 'Spring Security', icon: '🔒' },
-      { name: 'REST APIs',       icon: '🔌' },
-      { name: 'JPA / Hibernate', icon: '🗄️' },
-      { name: 'Microservices',   icon: '🏗️' },
-      { name: 'Node.js',         icon: '🟢' },
-      { name: 'Express.js',      icon: '⚡' },
-      { name: 'FastAPI',         icon: '🐍' },
+      { name: 'Java',                  icon: '☕', accent: true },
+      { name: 'Spring Boot',           icon: '🌱', accent: true },
+      { name: 'Spring Cloud Gateway',  icon: '🌐', accent: true },
+      { name: 'REST APIs',             icon: '🔌', accent: true },
+      { name: 'Apache Kafka',          icon: '📬', accent: true },
+      { name: 'Node.js',               icon: '🟢' },
+      { name: 'Express.js',            icon: '⚡' },
+      { name: 'Python FastAPI',        icon: '🐍' },
     ],
   },
   {
-    category: 'Databases',
+    category: 'Databases & Caching',
     icon: '🗃️',
     skills: [
-      { name: 'PostgreSQL',      icon: '🐘', accent: true },
-      { name: 'MySQL',           icon: '🐬' },
-      { name: 'MongoDB',         icon: '🌿' },
-      { name: 'Supabase',        icon: '⚡' },
-      { name: 'Redis',           icon: '🔴' },
-      { name: 'Mongoose / JPA',  icon: '📋' },
+      { name: 'SQL',           icon: '📊', accent: true },
+      { name: 'PostgreSQL',    icon: '🐘', accent: true },
+      { name: 'MySQL',         icon: '🐬', accent: true },
+      { name: 'Redis',         icon: '🔴' },
+      { name: 'Supabase',      icon: '⚡' },
+      { name: 'MongoDB',       icon: '🍃' },
     ],
   },
   {
-    category: 'Frontend',
+    category: 'Frontend & Mobile',
     icon: '🎨',
     skills: [
-      { name: 'React.js',        icon: '⚛️', accent: true },
-      { name: 'React Native',    icon: '📱', accent: true },
-      { name: 'JavaScript',      icon: '🟨' },
-      { name: 'TypeScript',      icon: '🟦' },
-      { name: 'Tailwind CSS',    icon: '🎨' },
-      { name: 'HTML / CSS',      icon: '🌐' },
+      { name: 'React',         icon: '⚛️', accent: true },
+      { name: 'React Native',  icon: '📱', accent: true },
+      { name: 'JavaScript',    icon: '🟨', accent: true },
+      { name: 'HTML / CSS',    icon: '🌐' },
+      { name: 'Expo',          icon: '🚀' },
+      { name: 'Tailwind CSS',  icon: '🌊' },
     ],
   },
   {
     category: 'Tools & DevOps',
     icon: '🛠️',
     skills: [
-      { name: 'Git / GitHub',    icon: '🔀', accent: true },
-      { name: 'Docker',          icon: '🐳' },
-      { name: 'Postman',         icon: '📮' },
-      { name: 'Apache Kafka',    icon: '📨' },
-      { name: 'Expo / EAS',      icon: '🚀' },
-      { name: 'Maven',           icon: '📦' },
+      { name: 'Git / GitHub',       icon: '🔀', accent: true },
+      { name: 'Postman',            icon: '📮', accent: true },
+      { name: 'Docker & Compose',   icon: '🐳', accent: true },
+      { name: 'API Testing',        icon: '🧪' },
+      { name: 'Debugging',          icon: '🔍' },
+      { name: 'Integration Testing', icon: '✅' },
     ],
   },
 ]
@@ -128,6 +135,36 @@ function SkillCard({ group, delay }: { group: SkillGroup; delay: number }) {
 }
 
 /* --------------------------------------------------------
+   AI & NLP Implementation Note
+-------------------------------------------------------- */
+function AIExposureNote() {
+  return (
+    <motion.div
+      className="mt-6 p-5 rounded-xl flex flex-wrap items-start gap-4"
+      style={{ background: '#1A1E27', border: '1px solid #2A2F3A' }}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+    >
+      <div className="flex items-center gap-2 flex-shrink-0">
+        <span className="text-lg">🤖</span>
+        <span className="font-heading font-semibold text-sm" style={{ color: '#F3EFE7' }}>
+          AI & NLP Implementation
+        </span>
+      </div>
+      <p className="text-sm flex-1" style={{ color: '#A6ADBB', lineHeight: 1.6 }}>
+        Implemented <span style={{ color: '#E8A33D' }}>Zero-Shot NLP classification</span> and{' '}
+        <span style={{ color: '#E8A33D' }}>embedding-based duplicate detection</span> in{' '}
+        <span style={{ color: '#F3EFE7' }}>CivicPulse+</span> using Python FastAPI with Hugging Face Inference
+        APIs. Also integrated the <span style={{ color: '#E8A33D' }}>Gemini API</span> for AI features
+        in the ShopSphere hackathon project, and completed generative AI coursework through Microsoft and LinkedIn Learning.
+      </p>
+    </motion.div>
+  )
+}
+
+/* --------------------------------------------------------
    Skills Section
 -------------------------------------------------------- */
 export default function Skills() {
@@ -136,7 +173,7 @@ export default function Skills() {
   return (
     <div
       className="section-padding"
-      style={{ backgroundColor: '#12151C' }}
+      style={{ backgroundColor: '#0B0E14' }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
@@ -148,48 +185,52 @@ export default function Skills() {
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <p className="kicker mb-3">( 02 ) SKILLS</p>
-          <h2 className="section-heading max-w-xl">
-            The stack I ship with
+          <p className="kicker mb-3">( 02 ) TECHNICAL SKILLS</p>
+          <h2 className="section-heading">
+            Technologies I work with — <span className="text-amber-gradient">verified by code</span>
           </h2>
-          <p className="mt-3 text-base max-w-lg" style={{ color: '#A6ADBB' }}>
-            Tools I use daily — no filler, no aspirational fluff. Everything below
-            has been used in a real project or internship context.
+          <p className="mt-2 text-sm" style={{ color: '#A6ADBB' }}>
+            Technologies applied across my MCA major project, software internship, personal backend projects, and hackathons.
           </p>
         </motion.div>
 
-        {/* Grid — 4 cols desktop, 2 tablet, 1 mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        {/* 4-column grid for primary skills */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {skillGroups.map((group, i) => (
-            <SkillCard key={group.category} group={group} delay={i * 0.08} />
+            <SkillCard key={group.category} group={group} delay={i * 0.1} />
           ))}
         </div>
 
-        {/* Currently Learning strip */}
+        {/* AI & NLP Note */}
+        <AIExposureNote />
+
+        {/* Currently Learning / Deepening strip */}
         <motion.div
-          className="mt-10 p-5 rounded-xl flex flex-wrap items-center gap-4"
-          style={{ background: '#1A1E27', border: '1px solid #2A2F3A' }}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-6 p-4 rounded-xl flex flex-wrap items-center gap-3 text-xs"
+          style={{ background: 'rgba(232,163,61,0.04)', border: '1px solid rgba(232,163,61,0.15)' }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <div className="flex items-center gap-2">
+          <span className="font-heading font-semibold" style={{ color: '#E8A33D' }}>
+            Currently Deepening:
+          </span>
+          {[
+            'Advanced Spring Boot & Microservices Patterns',
+            'Distributed Transactions',
+            'SQL Optimization & Indexing',
+            'System Design & Low-Level Design (LLD)',
+            'Data Structures & Algorithms',
+          ].map(topic => (
             <span
-              className="inline-block w-2 h-2 rounded-full animate-pulse"
-              style={{ backgroundColor: '#6FCF97' }}
-            />
-            <span className="font-heading font-semibold text-sm" style={{ color: '#F3EFE7' }}>
-              Currently Learning
+              key={topic}
+              className="px-2.5 py-1 rounded-md"
+              style={{ background: '#12161F', color: '#A6ADBB', border: '1px solid #232834' }}
+            >
+              {topic}
             </span>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {['Java 8+ & Multithreading', 'Spring Security', 'SQL & Joins', 'DSA', 'System Design'].map(item => (
-              <span key={item} className="tag-chip" style={{ borderColor: 'rgba(111,207,151,0.25)', color: '#6FCF97', background: 'rgba(111,207,151,0.08)' }}>
-                {item}
-              </span>
-            ))}
-          </div>
+          ))}
         </motion.div>
 
       </div>

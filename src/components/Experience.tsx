@@ -10,15 +10,15 @@ const experiences = [
     id: 'intern-1',
     role: 'Software Development Intern',
     company: 'AmbuGrid System LLP',
-    duration: 'Jun 2026 – Oct 2026',
+    duration: 'Jun 2026 – Present',
     location: 'Pune, MH (Hybrid)',
     type: 'Internship',
     bullets: [
-      'Worked on ParkVahan — a smart parking & mobility platform — building mobile/web features using React Native, React.js and a Node.js + Express.js REST API backend backed by Supabase PostgreSQL.',
-      'Integrated third-party services including Surepass (vehicle verification), Razorpay (payments), MSG91 (notifications), FCM (push), and Exotel (calling/SOS), handling API integration, documentation and debugging.',
-      'Worked on parking discovery & booking, QR-based entry/exit, parking owner/guard workflows, vehicle registration, EV charging flows, admin/mobile dashboards and deployment-related tasks using Docker, Expo/EAS and Git.',
+      'Contributed to ParkVahan — a parking and mobility platform — working on application features across mobile (React Native/Expo) and web (React.js) surfaces, backed by a Node.js + Express.js REST API and Supabase/PostgreSQL database.',
+      'Worked on API integration tasks including connecting third-party services for vehicle verification, notifications, and payments; handled API documentation, debugging, and integration testing.',
+      'Participated in feature development covering parking workflows, vehicle registration, user dashboards, and admin flows; used Git/GitHub for version control and Postman for API testing.',
     ],
-    stack: ['React Native', 'React.js', 'Node.js', 'Express.js', 'Supabase', 'PostgreSQL', 'Razorpay', 'Docker', 'Expo/EAS', 'Postman', 'Git'],
+    stack: ['React Native', 'Expo', 'React.js', 'Node.js', 'Express.js', 'Supabase', 'PostgreSQL', 'REST APIs', 'Postman', 'Git/GitHub'],
   },
 ]
 
@@ -140,10 +140,10 @@ export default function Experience() {
         >
           <p className="kicker mb-3">( 04 ) EXPERIENCE</p>
           <h2 className="section-heading max-w-lg">
-            Where I've <span className="text-amber-gradient">shipped things</span>
+            Where I've <span className="text-amber-gradient">contributed</span>
           </h2>
           <p className="mt-3 text-sm" style={{ color: '#A6ADBB' }}>
-            Real-world, production-context engineering work.
+            Real-world engineering work during my internship at AmbuGrid System LLP.
           </p>
         </motion.div>
 
@@ -167,7 +167,7 @@ export default function Experience() {
                 style={{ background: '#2A2F3A', border: '1.5px solid #2A2F3A' }}
               />
             </div>
-            <p className="pb-4 text-sm" style={{ color: '#2A2F3A', fontStyle: 'italic' }}>
+            <p className="pb-4 text-sm" style={{ color: '#8E96A4', fontStyle: 'italic' }}>
               More entries coming — actively looking for FTE roles
             </p>
           </motion.div>

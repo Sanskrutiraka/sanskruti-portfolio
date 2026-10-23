@@ -73,26 +73,26 @@ function StatCard({ value, label, icon, delay }: StatCardProps) {
 -------------------------------------------------------- */
 const stats: StatCardProps[] = [
   {
-    value: '3+',
-    label: 'Full-Stack & Backend Projects',
+    value: '4+',
+    label: 'Projects — Backend, Mobile & Full-Stack',
     icon: <Code2 size={18} />,
     delay: 0.1,
   },
   {
-    value: '3+Months',
-    label: 'Software Development Internship Experience at AmbuGrid System',
+    value: 'Intern',
+    label: 'Software Development Intern · Jun 2026–Present · AmbuGrid System LLP',
     icon: <Briefcase size={18} />,
     delay: 0.2,
   },
   {
     value: '8.75',
-    label: 'MCA CGPA',
+    label: 'MCA CGPA · Sinhgad Institute, SPPU',
     icon: <GraduationCap size={18} />,
     delay: 0.3,
   },
   {
     value: 'Pune',
-    label: 'Open to Pune / Bangalore / Pan India Remote — available immediately',
+    label: 'Pune, Maharashtra · Open to Pune / Bangalore / Remote',
     icon: <MapPin size={18} />,
     delay: 0.4,
   },
@@ -111,7 +111,7 @@ export default function About() {
           <p className="kicker mb-3">( 01 ) ABOUT</p>
           <h2 className="section-heading max-w-lg">
             MCA Graduate —<br />
-            <span className="text-amber-gradient">Backend Engineer in the making</span>
+            <span className="text-amber-gradient">Junior Software Engineer</span>
           </h2>
         </RevealOnScroll>
 
@@ -122,26 +122,29 @@ export default function About() {
           <RevealOnScroll delay={0.1}>
             <div className="space-y-5">
               <p className="text-base leading-relaxed" style={{ color: '#A6ADBB', lineHeight: 1.8 }}>
-                I'm <span style={{ color: '#F3EFE7' }}>Sanskruti Raka</span>, an MCA postgraduate
-                (passout <span style={{ color: '#F3EFE7' }}>June 2026</span>) from Savitribai Phule Pune University.
-                My postgraduate journey was where I went from writing basic programs to shipping
-                real microservices — learning not just the "how" but the "why" behind scalable system design.
+                I'm <span style={{ color: '#F3EFE7' }}>Sanskruti Raka</span>, an MCA graduate (2026)
+                and Software Development Intern at{' '}
+                <span style={{ color: '#E8A33D' }}>AmbuGrid System LLP</span>. I designed
+                and built <span style={{ color: '#F3EFE7' }}>CivicPulse+</span>, an AI-augmented
+                public grievance resolution platform powered by Spring Boot microservices,
+                Apache Kafka, Python FastAPI, and React.
               </p>
               <p className="text-base leading-relaxed" style={{ color: '#A6ADBB', lineHeight: 1.8 }}>
-                I specialize in <span style={{ color: '#E8A33D' }}>Java & Spring Boot</span> — building
-                production-grade REST APIs, microservice architectures, and distributed systems using
-                PostgreSQL, Redis, Kafka, and Docker. During my MCA I shipped a 4-service GovTech
-                platform, completed a software development internship, and built a hackathon full-stack app.
+                My core expertise is <span style={{ color: '#E8A33D' }}>Java, Spring Boot, REST APIs,
+                and SQL</span>. Through my internship work on the ParkVahan mobility platform and my
+                academic systems, I have hands-on experience designing RESTful services, integrating
+                relational databases, debugging multi-service workflows, and building responsive client
+                interfaces.
               </p>
               <p className="text-base leading-relaxed" style={{ color: '#A6ADBB', lineHeight: 1.8 }}>
-                What I'm looking for: a <span style={{ color: '#F3EFE7' }}>backend or full-stack role</span> where
-                I can contribute to real products from day one, collaborate with senior engineers,
-                and keep growing fast. Open to Pune, Bangalore, or fully remote.
+                I'm looking for an <span style={{ color: '#F3EFE7' }}>entry-level Software Engineer
+                or Java Backend Developer</span> role where I can contribute to production systems, solve
+                challenging engineering problems, and continue growing.
               </p>
 
               {/* Highlight pills */}
               <div className="flex flex-wrap gap-2 pt-2">
-                {['MCA 2026', 'Java & Spring Boot', 'Microservices', 'REST APIs', 'Open Source'].map(tag => (
+                {['MCA 2026', 'Java & Spring Boot', 'Microservices', 'REST APIs', 'Apache Kafka', 'SQL & PostgreSQL', 'React Native'].map(tag => (
                   <span key={tag} className="tag-chip">{tag}</span>
                 ))}
               </div>
@@ -152,8 +155,8 @@ export default function About() {
                 style={{ borderLeft: '3px solid #E8A33D' }}
               >
                 <p className="text-sm italic" style={{ color: '#A6ADBB' }}>
-                  "Every complex system is just simple, well-defined components interacting reliably.
-                  That's the engineering principle I obsess over — and what MCA taught me to apply in practice."
+                  "I enjoy understanding how software components work together —
+                  and building applications that are clear, maintainable, and reliable."
                 </p>
               </blockquote>
             </div>
