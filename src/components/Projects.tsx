@@ -1,8 +1,7 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
 import { Github, ExternalLink, ChevronLeft, ChevronRight, CheckCircle2, Laptop } from 'lucide-react'
 
 /* --------------------------------------------------------
@@ -36,14 +35,14 @@ const mainProjects: Project[] = [
     stack: [
       'Java 17',
       'Spring Boot 3.2',
-      'Spring Cloud Gateway',
       'Python FastAPI',
-      'Hugging Face APIs',
-      'React 18',
       'PostgreSQL',
       'Apache Kafka',
       'Redis',
       'Docker',
+      'React 18',
+      'Spring Cloud Gateway',
+      'Hugging Face APIs',
     ],
     github: 'https://github.com/Sanskrutiraka/CivicPulse',
     live: 'https://civicpulse.onrender.com',
@@ -73,7 +72,7 @@ const mainProjects: Project[] = [
       'Git',
     ],
     github: 'https://github.com/Sanskrutiraka/ParkVahan',
-    live: 'https://github.com/Sanskrutiraka/ParkVahan',
+    live: 'https://parkvahan.com',
     image: '/projects/ParkVahan.png',
     badge: 'Internship Project',
     badgeColor: '#5FA8A0',
@@ -124,7 +123,7 @@ const mainProjects: Project[] = [
     live: 'https://shopsphere-ecommerce-dusky.vercel.app',
     image: '/projects/ShopSphere.png',
     badge: 'Hackathon Project',
-    badgeColor: '#F59E0B',
+    badgeColor: '#EC4899',
   },
 ]
 
@@ -141,7 +140,7 @@ const otherProjects: Project[] = [
     stack: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'TypeScript', 'Vercel'],
     github: 'https://github.com/Sanskrutiraka/FocusDo',
     live: 'https://focus-do-task.vercel.app',
-    image: '/projects/focusdo.png',
+    image: '/projects/FocusDo.png',
     badge: 'Full-Stack App',
     badgeColor: '#EC4899',
   },
@@ -157,7 +156,7 @@ const otherProjects: Project[] = [
     stack: ['TypeScript', 'React', 'Tailwind CSS', 'Vite', 'OCR / APIs', 'Vercel'],
     github: 'https://github.com/Sanskrutiraka/vehicle-plate-check-audit',
     live: 'https://vehicle-plate-check-audit.vercel.app',
-    image: '/projects/vehicle-plate.png',
+    image: '/projects/vehicle-plate-check.png',
     badge: 'Vision & Audit',
     badgeColor: '#06B6D4',
   },
@@ -404,23 +403,12 @@ function ProjectCarousel({
   items: Project[]
   sectionId: string
 }) {
-  const autoplay = useRef(
-    Autoplay({
-      delay: 3500,
-      stopOnInteraction: true,
-      rootNode: emblaRoot => emblaRoot.parentElement,
-    })
-  )
-
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: true,
-      align: 'start',
-      dragFree: false,
-      containScroll: 'trimSnaps',
-    },
-    [autoplay.current]
-  )
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: 'start',
+    dragFree: false,
+    containScroll: 'trimSnaps',
+  })
 
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
@@ -440,15 +428,30 @@ function ProjectCarousel({
     }
   }, [emblaApi, onSelect])
 
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
+  const scrollPrev = useCallback(() => {
+    if (!emblaApi) return
+    if (emblaApi.canScrollPrev()) {
+      emblaApi.scrollPrev()
+    } else {
+      emblaApi.scrollTo(scrollSnaps.length - 1)
+    }
+  }, [emblaApi, scrollSnaps])
+
+  const scrollNext = useCallback(() => {
+    if (!emblaApi) return
+    if (emblaApi.canScrollNext()) {
+      emblaApi.scrollNext()
+    } else {
+      emblaApi.scrollTo(0)
+    }
+  }, [emblaApi])
 
   return (
     <div className="relative">
       {/* Controls Bar for this Carousel */}
       <div className="flex items-center justify-between mb-4">
         <p className="text-xs text-[#8E96A4]">
-          Swipe or drag to browse · Auto-scrolls · Hover to pause
+          Swipe or drag to browse · Use arrows to navigate
         </p>
         <div className="flex items-center gap-2">
           <button
@@ -476,8 +479,6 @@ function ProjectCarousel({
       <div
         className="embla overflow-hidden -mx-2 px-2 py-2"
         ref={emblaRef}
-        onMouseEnter={() => autoplay.current.stop()}
-        onMouseLeave={() => autoplay.current.play()}
       >
         <div className="embla__container flex gap-5">
           {items.map(project => (

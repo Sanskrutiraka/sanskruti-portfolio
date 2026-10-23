@@ -332,8 +332,8 @@ export default function Contact() {
                 </span>
               </div>
               <p className="text-xs leading-relaxed" style={{ color: '#A6ADBB' }}>
-                Currently a Software Development Intern at AmbuGrid System LLP.
-                Seeking full-time software engineering opportunities (Junior Software
+                Completed Software Development Internship at AmbuGrid System LLP (Oct 20, 2026).
+                Actively seeking full-time software engineering roles (Junior Software
                 Engineer / Java Backend Developer). Open to Pune, Bangalore, or fully remote.
               </p>
             </div>

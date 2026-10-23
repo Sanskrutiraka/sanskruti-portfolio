@@ -10,9 +10,9 @@ const experiences = [
     id: 'intern-1',
     role: 'Software Development Intern',
     company: 'AmbuGrid System LLP',
-    duration: 'Jun 2026 – Present',
+    duration: 'Jun 2026 – Oct 2026',
     location: 'Pune, MH (Hybrid)',
-    type: 'Internship',
+    type: 'Completed Internship',
     bullets: [
       'Contributed to ParkVahan — a parking and mobility platform — working on application features across mobile (React Native/Expo) and web (React.js) surfaces, backed by a Node.js + Express.js REST API and Supabase/PostgreSQL database.',
       'Worked on API integration tasks including connecting third-party services for vehicle verification, notifications, and payments; handled API documentation, debugging, and integration testing.',

@@ -80,7 +80,7 @@ const stats: StatCardProps[] = [
   },
   {
     value: 'Intern',
-    label: 'Software Development Intern · Jun 2026–Present · AmbuGrid System LLP',
+    label: 'Software Development Intern · Jun 2026–Oct 2026 · AmbuGrid System LLP',
     icon: <Briefcase size={18} />,
     delay: 0.2,
   },
