@@ -174,7 +174,7 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Sanskruti Raka"
+                  placeholder="Your name"
                   className="form-input"
                 />
               </div>
@@ -182,7 +182,7 @@ export default function Contact() {
               {/* Email */}
               <div>
                 <label
-                  htmlFor="contact-email"
+                  htmlFor="contact-email-input"
                   className="block text-xs font-heading font-semibold mb-2 uppercase tracking-wide"
                   style={{ color: '#A6ADBB' }}
                 >
@@ -291,25 +291,24 @@ export default function Contact() {
                   href={link.href}
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center gap-3 group"
+                  className="flex items-center gap-3 group p-2 -mx-2 rounded-lg hover:bg-[#1A1F2B] transition-colors"
                 >
                   <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200"
+                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:border-amber-400 group-hover:bg-amber-400/10 text-amber-400"
                     style={{
-                      background: '#1A1E27',
-                      border: '1px solid #2A2F3A',
-                      color: '#A6ADBB',
+                      background: 'rgba(232,163,61,0.08)',
+                      border: '1px solid rgba(232,163,61,0.25)',
                     }}
                   >
                     {link.icon}
                   </div>
                   <div>
-                    <p className="text-xs font-heading font-semibold uppercase tracking-wide" style={{ color: '#2A2F3A' }}>
+                    <p className="text-xs font-heading font-semibold uppercase tracking-wide" style={{ color: '#8E96A4' }}>
                       {link.label}
                     </p>
                     <p
-                      className="text-sm transition-colors duration-200 group-hover:text-amber-400"
-                      style={{ color: '#A6ADBB' }}
+                      className="text-sm font-medium transition-colors duration-200 underline underline-offset-4 decoration-amber-400/40 hover:decoration-amber-400"
+                      style={{ color: '#E8A33D' }}
                     >
                       {link.value}
                     </p>
@@ -329,13 +328,13 @@ export default function Contact() {
                   style={{ backgroundColor: '#6FCF97' }}
                 />
                 <span className="font-heading font-semibold text-sm" style={{ color: '#F3EFE7' }}>
-                  Currently Available
+                  Open to Opportunities
                 </span>
               </div>
               <p className="text-xs leading-relaxed" style={{ color: '#A6ADBB' }}>
-                Actively seeking full-time backend / full-stack roles.
-                Available to join immediately after graduation (2026).
-                Open to Pune, Bangalore, or fully remote.
+                Currently a Software Development Intern at AmbuGrid System LLP.
+                Seeking full-time software engineering opportunities (Junior Software
+                Engineer / Java Backend Developer). Open to Pune, Bangalore, or fully remote.
               </p>
             </div>
           </motion.div>

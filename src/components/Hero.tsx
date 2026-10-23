@@ -19,56 +19,9 @@ function useReducedMotion(): boolean {
   return reduced
 }
 
-/* --------------------------------------------------------
-   Typing animation hook
--------------------------------------------------------- */
-const ROLES = [
-  'Java & Spring Boot Backend Developer',
-  'REST API Builder',
-  'Full-Stack Capable (React)',
-]
+const ROLE_SUBTITLE = 'Junior Software Engineer | Java & Spring Boot'
 
-function useTypingEffect(texts: string[], speed = 60, pauseMs = 1800) {
-  const [displayText, setDisplayText] = useState('')
-  const [textIndex, setTextIndex] = useState(0)
-  const [charIndex, setCharIndex] = useState(0)
-  const [deleting, setDeleting] = useState(false)
-
-  useEffect(() => {
-    const current = texts[textIndex]
-    let timer: ReturnType<typeof setTimeout>
-
-    if (!deleting) {
-      if (charIndex < current.length) {
-        timer = setTimeout(() => {
-          setDisplayText(current.slice(0, charIndex + 1))
-          setCharIndex(c => c + 1)
-        }, speed)
-      } else {
-        timer = setTimeout(() => setDeleting(true), pauseMs)
-      }
-    } else {
-      if (charIndex > 0) {
-        timer = setTimeout(() => {
-          setDisplayText(current.slice(0, charIndex - 1))
-          setCharIndex(c => c - 1)
-        }, speed / 2)
-      } else {
-        setDeleting(false)
-        setTextIndex(i => (i + 1) % texts.length)
-      }
-    }
-    return () => clearTimeout(timer)
-  }, [charIndex, deleting, textIndex, texts, speed, pauseMs])
-
-  return displayText
-}
-
-/* --------------------------------------------------------
-   Hero
--------------------------------------------------------- */
 export default function Hero() {
-  const typedRole = useTypingEffect(ROLES)
   const reduced = useReducedMotion()
   const containerRef = useRef<HTMLDivElement>(null)
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
@@ -137,7 +90,7 @@ export default function Hero() {
                 style={{ backgroundColor: '#6FCF97' }}
               />
               <span className="kicker" style={{ color: '#E8A33D', letterSpacing: '0.1em', fontSize: '0.72rem' }}>
-                Backend Developer · Open to Work
+                Junior Software Engineer · Open to Work
               </span>
             </motion.div>
 
@@ -153,18 +106,18 @@ export default function Hero() {
               <span className="text-amber-gradient">Sanskruti Raka</span>
             </motion.h1>
 
-            {/* Typing role */}
+            {/* Role subtitle — stable, no typing animation */}
             <motion.div
-              className="text-xl font-heading font-medium min-h-[2rem]"
+              className="text-xl font-heading font-medium"
               style={{ color: '#A6ADBB', letterSpacing: '-0.01em' }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              {typedRole}<span className="cursor-blink" />
+              {ROLE_SUBTITLE}
             </motion.div>
 
-            {/* Value statement — updated: no physics reference */}
+            {/* Value statement */}
             <motion.p
               className="text-base max-w-lg leading-relaxed"
               style={{ color: '#A6ADBB', lineHeight: 1.7 }}
@@ -172,9 +125,10 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              MCA 2026 — from writing my first Java code to shipping
-              production-grade Spring Boot microservices. I build scalable
-              REST APIs, distributed backends, and clean full-stack experiences.
+              MCA graduate and Software Development Intern with experience in
+              backend development, REST API integration, database-backed
+              applications, debugging, and testing. I work with Java, Spring
+              Boot, JavaScript, SQL, and modern application development tools.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -232,7 +186,7 @@ export default function Hero() {
               >
                 <Mail size={17} />
               </a>
-              <span className="text-xs ml-2" style={{ color: '#2A2F3A' }}>——</span>
+              <span className="text-xs ml-2" style={{ color: '#6B7280' }}>——</span>
               <span className="text-xs" style={{ color: '#A6ADBB' }}>Let's connect</span>
             </motion.div>
           </div>
@@ -258,15 +212,7 @@ export default function Hero() {
                 }}
               />
 
-              {/*
-                Spinning border ring — KEY FIX:
-                · Gradient goes 0→360 with NO transparent section
-                  (low-opacity amber sections instead of transparent,
-                   so there is never a hard colour-to-nothing edge)
-                · Photo container is a SIBLING (not child) of this div,
-                  so it never rotates with it
-                · inset: 0 here, inset: '3px' on photo = 3px ring gap
-              */}
+              {/* Gradient border ring */}
               <div
                 style={{
                   position: 'absolute',

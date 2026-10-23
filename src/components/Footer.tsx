@@ -59,15 +59,15 @@ export default function Footer() {
                 className="w-7 h-7 rounded-md flex items-center justify-center text-[#0B0E14] font-bold font-heading text-xs"
                 style={{ backgroundColor: '#E8A33D' }}
               >
-                {'<'}
+                {'SR'}
               </span>
               <span className="font-heading font-bold" style={{ color: '#F3EFE7' }}>
                 Sanskruti Raka
               </span>
             </div>
             <p className="text-sm max-w-xs" style={{ color: '#A6ADBB', lineHeight: 1.7 }}>
-              Java &amp; Spring Boot Backend Developer · MCA 2026 ·
-              Building scalable systems from first principles.
+              Junior Software Engineer · Java & Spring Boot · MCA 2026 ·
+              Seeking full-time engineering opportunities.
             </p>
 
             <div className="flex items-center gap-2 pt-1">
@@ -96,15 +96,14 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <p className="kicker mb-1" style={{ color: '#2A2F3A' }}>Navigation</p>
+            <p className="kicker mb-1" style={{ color: '#8E96A4' }}>Navigation</p>
             {navLinks.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
                 smooth
                 duration={600}
-                className="text-sm cursor-pointer transition-colors duration-200 hover:text-amber-400"
-                style={{ color: '#A6ADBB' }}
+                className="text-sm cursor-pointer transition-all duration-200 text-[#C5CBD5] hover:text-amber-400 hover:translate-x-1 inline-block"
               >
                 {link.label}
               </Link>
@@ -116,7 +115,7 @@ export default function Footer() {
 
         <div
           className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs"
-          style={{ color: '#2A2F3A' }}
+          style={{ color: '#8E96A4' }}
         >
           <p>© {year} Sanskruti Raka. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
@@ -125,8 +124,8 @@ export default function Footer() {
               href="https://github.com/Sanskrutiraka"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:text-amber-400 transition-colors duration-200"
-              style={{ color: '#A6ADBB' }}
+              className="flex items-center gap-1 font-semibold underline underline-offset-4 decoration-amber-400/50 hover:decoration-amber-400 hover:text-amber-300 transition-colors duration-200"
+              style={{ color: '#E8A33D' }}
               aria-label="GitHub profile of Sanskrutiraka"
             >
               <Github size={13} />
