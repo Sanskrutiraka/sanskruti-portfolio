@@ -18,9 +18,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Editor / IDE folders
+# Editor and tool directories
 .vscode/
 .idea/
+.cursor/
+.antigravity/
 *.suo
 *.ntvs*
 *.njsproj
