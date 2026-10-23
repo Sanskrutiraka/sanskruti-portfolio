@@ -1,107 +1,126 @@
 # Sanskruti Raka — Developer Portfolio
 
-A personal portfolio website for **Sanskruti Raka**, Java & Spring Boot Backend Developer (MCA 2026).  
-Built with React + Vite + TypeScript + Tailwind CSS, featuring scroll-driven animations, an auto-playing project carousel, and a serverless contact form via EmailJS.
+Personal developer portfolio for Sanskruti Raka, Junior Software Engineer specializing in Java, Spring Boot, REST APIs, and modern web application development.
+
+**Live Demo:** [sanskruti-portfolio-nine.vercel.app](https://sanskruti-portfolio-nine.vercel.app/)
 
 ---
 
-## 🔗 Live Demo
- 
-👉 **[sanskruti-portfolio-nine.vercel.app](https://sanskruti-portfolio-nine.vercel.app/)**
+## Preview
+
+> Add an application screenshot or preview GIF here (`public/og-image.png`).
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | React 18 + Vite 5 |
-| Language | TypeScript |
-| Styling | Tailwind CSS 3 |
-| Animations | Framer Motion |
-| Carousel | Embla Carousel + Autoplay |
-| Icons | Lucide React |
-| Contact form | EmailJS (serverless, no backend) |
-| Scroll-spy | react-scroll |
-| Intersection | react-intersection-observer |
+- **Frontend:** React 18, TypeScript, Vite
+- **Styling:** Tailwind CSS, CSS Custom Properties
+- **Motion & UI:** Framer Motion, Lucide React
+- **Carousels:** Embla Carousel (`embla-carousel-react`, `embla-carousel-autoplay`)
+- **Navigation & Visibility:** `react-scroll`, `react-intersection-observer`
+- **Contact Service:** EmailJS (`@emailjs/browser`)
 
 ---
 
-## 📋 Sections
+## Features
 
-1. **Hero** — Animated typing role, passport-style photo with spinning border ring, CTA buttons
-2. **About** — Narrative, stat cards, quote
-3. **Skills** — 4-column technology grid with "Currently Learning" strip
-4. **Projects** — Auto-scrolling carousel (3 s interval) with 3D tilt-on-hover cards
-5. **Experience** — Amber vertical timeline with internship details
-6. **Education** — Timeline cards for MCA, B.Sc., 12th, and 10th
-7. **Certifications** — Auto-scrolling carousel of verified certificates
-8. **Contact** — EmailJS form with honeypot spam protection and 60 s rate-limit
+- **Hero Section:** Introduction, quick call-to-actions, and social links.
+- **About:** Summary of background, technical strengths, and core metrics.
+- **Skills Matrix:** Categorized technical skill groups (Backend, Databases, Frontend, Tools) with highlighted proficiencies.
+- **Projects Showcase:** Interactive horizontal sliding carousel with standard laptop mockup frames, expandable tech stack chips, and direct links to GitHub repositories and live deployments.
+- **Work Experience:** Chronological timeline covering software development internship deliverables and responsibilities.
+- **Education:** Academic background from secondary school to MCA degree.
+- **Certifications:** Verified training programs and job simulation completions with interactive preview modal.
+- **Contact Form:** Client-side contact form powered by EmailJS, including client-side rate limiting and spam protection.
 
 ---
 
-## 🚀 Setup
+## Getting Started
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/Sanskrutiraka/<repo-name>.git
-cd <repo-name>
+### Prerequisites
 
-# 2. Install dependencies
-npm install
+- Node.js (version 18.x or later recommended)
+- npm (version 9.x or later)
 
-# 3. Set up environment variables
-cp .env.example .env
-# Open .env and fill in your EmailJS credentials
+### Installation
 
-# 4. Start the dev server
-npm run dev
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Sanskrutiraka/sanskruti-portfolio.git
+   cd sanskruti-portfolio
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure environment variables:
+   Create a `.env` file in the root directory based on `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
+   Add your EmailJS credentials:
+   ```env
+   VITE_EMAILJS_SERVICE_ID=your_service_id
+   VITE_EMAILJS_TEMPLATE_ID=your_template_id
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:5173` in your browser.
+
+5. Type check and build for production:
+   ```bash
+   npm run lint
+   npm run build
+   ```
+
+---
+
+## Project Structure
+
+```
+├── public/
+│   ├── Docs/                  # Resume PDF and certification assets
+│   ├── projects/              # Drop-in project screenshots (16:10 ratio)
+│   ├── favicon.svg            # Site favicon
+│   └── og-image.png           # Social preview image
+├── src/
+│   ├── components/            # Section components (Hero, About, Projects, etc.)
+│   ├── App.tsx                # Main single-page application layout
+│   ├── index.css              # Global styles, variables, and typography
+│   └── main.tsx               # Application entry point
+├── index.html                 # HTML template, SEO, and Open Graph tags
+├── package.json               # Scripts and dependencies
+└── vite.config.ts             # Vite configuration
 ```
 
-The site opens at `http://localhost:5173`.
+---
+
+## Deployment
+
+The project is configured for deployment on Vercel.
+
+1. Push changes to GitHub.
+2. Import the repository in [Vercel](https://vercel.com).
+3. Set the build command to `npm run build` and the output directory to `dist`.
+4. Add the `VITE_EMAILJS_*` environment variables in the Vercel project dashboard.
 
 ---
 
-## 🔑 Environment Variables
+## Contact
 
-All sensitive credentials live in `.env` (git-ignored). Copy `.env.example` to get started:
-
-```env
-VITE_EMAILJS_SERVICE_ID=your_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_template_id
-VITE_EMAILJS_PUBLIC_KEY=your_public_key
-```
-
-Get your free keys at [emailjs.com](https://www.emailjs.com).
+- **Email:** [sanskrutiraka1602@gmail.com](mailto:sanskrutiraka1602@gmail.com)
+- **LinkedIn:** [linkedin.com/in/sanskruti-raka-105789261](https://www.linkedin.com/in/sanskruti-raka-105789261)
+- **GitHub:** [github.com/Sanskrutiraka](https://github.com/Sanskrutiraka)
 
 ---
 
-## 📁 Project Structure
+## License
 
-```
-src/
-├── components/
-│   ├── Navbar.tsx
-│   ├── Hero.tsx
-│   ├── About.tsx
-│   ├── Skills.tsx
-│   ├── Projects.tsx
-│   ├── Experience.tsx
-│   ├── Education.tsx
-│   ├── Certifications.tsx
-│   ├── Contact.tsx
-│   └── Footer.tsx
-├── index.css       # Design tokens + global styles (Ink & Ember palette)
-├── App.tsx
-└── main.tsx
-public/
-├── resume.pdf      # Linked by the Download Resume button
-├── Docs/photo.jpeg # Profile photo
-└── og-image.png    # 1200×630 Open Graph preview image
-```
-
----
-
-## 📄 License
-
-MIT © 2026 [Sanskruti Raka](mailto:sanskrutiraka1602@gmail.com)
+MIT License. See [package.json](package.json).
