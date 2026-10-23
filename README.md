@@ -6,9 +6,7 @@ Personal developer portfolio for Sanskruti Raka, Junior Software Engineer specia
 
 ---
 
-## Preview
-
-> Add an application screenshot or preview GIF here (`public/og-image.png`).
+![Sanskruti Raka Portfolio Preview](./public/projects/Preview.png)
 
 ---
 
