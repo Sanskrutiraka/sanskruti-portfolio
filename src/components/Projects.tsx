@@ -1,274 +1,427 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Github, ExternalLink, ChevronLeft, ChevronRight, CheckCircle2, Laptop } from 'lucide-react'
 
 /* --------------------------------------------------------
-   Project Data
+   Project Data Interfaces & Definitions
 -------------------------------------------------------- */
 interface Project {
   id: string
   title: string
   tagline: string
-  description: string
+  bullets?: string[]
+  description?: string
   stack: string[]
   github: string
-  live?: string
-  gradient: string
+  live: string
+  image?: string
   badge?: string
-  icon: string
+  badgeColor?: string
 }
 
-const projects: Project[] = [
+const mainProjects: Project[] = [
   {
     id: 'civicpulse',
     title: 'CivicPulse+',
-    tagline: 'AI-Powered Smart Grievance Management System',
-    description:
-      'Led full-stack development of an AI-powered grievance platform with complaint registration, RBAC/JWT auth, AI-assisted categorization & routing, SLA tracking, audit logs and analytics. Built on Spring Boot microservices, FastAPI for AI, Kafka for event streaming, and Docker Compose.',
-    stack: ['Java', 'Spring Boot', 'FastAPI', 'React', 'PostgreSQL', 'Redis', 'Kafka', 'Docker'],
+    tagline: 'AI-Augmented Public Grievance Resolution Platform',
+    bullets: [
+      'Microservices Architecture: 6 Spring Boot 3.2 services (API Gateway, User Service with JWT authentication and RBAC, Grievance Engine, Notification, Audit, Analytics).',
+      'FastAPI AI Service: Hugging Face Inference APIs for zero-shot classification across 14+ departments with Human-in-the-Loop (HITL) review queue.',
+      'Triage & Duplicates: Rule-based urgency scoring and embedding-based cosine similarity duplicate detection with an in-memory index.',
+      'Event Streaming & Profiles: Apache Kafka event-driven pipelines in local architecture; Render deploy profile uses REST event delivery (omitting separate Notification Service).',
+    ],
+    stack: [
+      'Java 17',
+      'Spring Boot 3.2',
+      'Spring Cloud Gateway',
+      'Python FastAPI',
+      'Hugging Face APIs',
+      'React 18',
+      'PostgreSQL',
+      'Apache Kafka',
+      'Redis',
+      'Docker',
+    ],
     github: 'https://github.com/Sanskrutiraka/CivicPulse',
-    gradient: 'from-amber-900/40 to-orange-950/40',
-    badge: 'Flagship',
-    icon: '🏛️',
+    live: 'https://civicpulse.onrender.com',
+    image: '/projects/CivicPulse-Plus.png',
+    badge: 'GovTech Microservices',
+    badgeColor: '#E8A33D',
   },
   {
     id: 'parkvahan',
     title: 'ParkVahan',
-    tagline: 'Smart Parking & Mobility Management Platform',
-    description:
-      'Built during internship at AmbuGrid System LLP. Full-stack mobile/web parking platform with driver, owner and guard workflows. Features parking discovery & booking, QR-based entry/exit, vehicle verification, SOS/calling, EV charging flows and notifications.',
-    stack: ['React Native', 'React.js', 'Node.js', 'Express.js', 'Supabase', 'PostgreSQL', 'Razorpay', 'Docker'],
+    tagline: 'Smart Parking & Mobility Platform — Internship Project',
+    bullets: [
+      'Internship Contribution: Developed core features and workflows during Software Development Internship at AmbuGrid System LLP.',
+      'Cross-Platform Stack: Built responsive application surfaces using React Native, Expo, React.js, and Node.js/Express.',
+      'Data & Workflows: Implemented PostgreSQL/Supabase database schemas, vehicle space telemetry, and REST API integrations.',
+      'Quality & Testing: Handled debugging, Postman API testing, and Git version control across mobile and web.',
+    ],
+    stack: [
+      'React Native',
+      'Expo',
+      'React.js',
+      'Node.js',
+      'Express.js',
+      'Supabase',
+      'PostgreSQL',
+      'REST APIs',
+      'Git',
+    ],
     github: 'https://github.com/Sanskrutiraka/ParkVahan',
-    gradient: 'from-teal-900/40 to-cyan-950/40',
-    badge: 'Internship',
-    icon: '🅿️',
+    live: 'https://github.com/Sanskrutiraka/ParkVahan',
+    image: '/projects/ParkVahan.png',
+    badge: 'Internship Project',
+    badgeColor: '#5FA8A0',
   },
   {
     id: 'complaint-router',
-    title: 'Smart Complaint Router',
-    tagline: 'Intelligent Complaint Processing Engine',
-    description:
-      'Java + Spring Boot complaint management system with complaint registration, JWT authentication, status tracking, admin/user workflows and automated complaint routing. REST API tested with Postman.',
-    stack: ['Java', 'Spring Boot', 'REST APIs', 'MySQL', 'JWT', 'Postman', 'Git'],
+    title: 'Smart Complaint Routing System',
+    tagline: 'Java & Spring Boot Backend Architecture',
+    bullets: [
+      'Java Spring Boot Backend: Modular REST API architecture with complaint registration, user management, and category routing.',
+      'State & Lifecycle Tracking: Managed complaint status transitions, admin/user workflows, and database persistence with MySQL.',
+      'Error Handling & Validation: Custom global exception handling, robust input validation, and comprehensive Postman test suites.',
+    ],
+    stack: [
+      'Java',
+      'Spring Boot',
+      'MySQL',
+      'Hibernate / JPA',
+      'REST APIs',
+      'Postman',
+      'Git',
+    ],
     github: 'https://github.com/Sanskrutiraka/smart-complaint-router',
-    gradient: 'from-violet-900/30 to-purple-950/40',
-    icon: '🔀',
+    live: 'https://github.com/Sanskrutiraka/smart-complaint-router',
+    image: '/projects/complaint-router.png',
+    badge: 'Java Backend',
+    badgeColor: '#A78BFA',
   },
+  {
+    id: 'shopsphere',
+    title: 'ShopSphere',
+    tagline: 'AI-Enabled E-Commerce Platform — Hackathon',
+    bullets: [
+      'Hackathon Project: Full-stack AI-powered e-commerce platform built with Code Worriers hackathon team.',
+      'AI Assistant Integration: Integrated Google Gemini API for intelligent conversational shopping and contextual recommendations.',
+      'Modern Frontend: Built dynamic catalog, cart state, and responsive checkout workflows with React and Tailwind CSS.',
+    ],
+    stack: [
+      'React',
+      'JavaScript',
+      'Google Gemini AI',
+      'Tailwind CSS',
+      'Django REST',
+      'PostgreSQL',
+      'Vercel',
+    ],
+    github: 'https://github.com/Sanskrutiraka/shopsphere-ecommerce',
+    live: 'https://shopsphere-ecommerce-dusky.vercel.app',
+    image: '/projects/ShopSphere.png',
+    badge: 'Hackathon Project',
+    badgeColor: '#F59E0B',
+  },
+]
+
+const otherProjects: Project[] = [
   {
     id: 'focusdo',
     title: 'FocusDo',
-    tagline: 'Full-Stack To-Do & Task Management App',
-    description:
-      'Full-stack to-do application with task management, JWT authentication and user-specific data. React Native frontend backed by Node.js + Express REST API with MongoDB. Deployed on Vercel and Render.',
-    stack: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Zod', 'Vercel', 'Render'],
+    tagline: 'Full-Stack Productivity & Task Management App',
+    bullets: [
+      'Full-Stack Architecture: React Native frontend backed by Node.js + Express REST API with MongoDB persistence.',
+      'Auth & Gamification: JWT token authentication with gamified Focus Garden state animations for daily streaks.',
+      'Cross-Platform Deployment: Deployed and live on Vercel and Render.',
+    ],
+    stack: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'TypeScript', 'Vercel'],
     github: 'https://github.com/Sanskrutiraka/FocusDo',
-    gradient: 'from-rose-900/30 to-pink-950/40',
-    icon: '✅',
+    live: 'https://focus-do-task.vercel.app',
+    image: '/projects/focusdo.png',
+    badge: 'Full-Stack App',
+    badgeColor: '#EC4899',
+  },
+  {
+    id: 'vehicle-plate',
+    title: 'Vehicle Plate Check & Audit',
+    tagline: 'Automated License Plate Verification & Audit System',
+    bullets: [
+      'Vision & OCR: Automated vehicle license plate query interface with real-time detection logs.',
+      'Security Audit Pipeline: Entry/exit timestamp auditing, vehicle verification status, and historical logs dashboard.',
+      'Production Deployment: Built with TypeScript, React, Vite, and Tailwind CSS; hosted on Vercel.',
+    ],
+    stack: ['TypeScript', 'React', 'Tailwind CSS', 'Vite', 'OCR / APIs', 'Vercel'],
+    github: 'https://github.com/Sanskrutiraka/vehicle-plate-check-audit',
+    live: 'https://vehicle-plate-check-audit.vercel.app',
+    image: '/projects/vehicle-plate.png',
+    badge: 'Vision & Audit',
+    badgeColor: '#06B6D4',
   },
 ]
 
 /* --------------------------------------------------------
-   Tilt-on-hover Project Card
-   — Responsive: full-width on mobile, fixed on desktop
+   Standard Laptop Screen Frame Mockup
+   Standard laptop screen ratio: 16:10
+   (URL link removed from top as requested)
 -------------------------------------------------------- */
-function ProjectCard({ project }: { project: Project }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const rotateX = useTransform(y, [-0.5, 0.5], [6, -6])
-  const rotateY = useTransform(x, [-0.5, 0.5], [-6, 6])
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = cardRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const nx = (e.clientX - rect.left) / rect.width - 0.5
-    const ny = (e.clientY - rect.top) / rect.height - 0.5
-    x.set(nx)
-    y.set(ny)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
+function LaptopMockup({
+  image,
+  title,
+  badge,
+  badgeColor,
+}: {
+  image?: string
+  title: string
+  badge?: string
+  badgeColor?: string
+}) {
+  const [imageFailed, setImageFailed] = useState(false)
 
   return (
-    /*
-      Width strategy:
-      - Mobile  (<640px): 100vw minus 48px padding = full visible width, no overflow
-      - Tablet  (640px+): 320px
-      - Desktop (1024px+): 380px
-      CSS custom property used so Tailwind responsive classes can't conflict.
-    */
-    <div
-      className="tilt-wrapper embla__slide"
-      style={{
-        width: 'min(calc(100vw - 48px), 380px)',
-        minWidth: 0,
-      }}
-    >
-      <motion.div
-        ref={cardRef}
-        className="card overflow-hidden h-full flex flex-col cursor-grab active:cursor-grabbing"
-        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      >
-        {/* Card header / gradient banner */}
-        <div
-          className={`relative h-44 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden flex-shrink-0`}
-        >
-          {/* Grid texture */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-              backgroundSize: '24px 24px',
-            }}
-          />
-          {/* Project icon */}
-          <div
-            className="text-6xl z-10 select-none"
-            style={{ filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.5))' }}
-          >
-            {project.icon}
+    <div className="relative w-full pt-2 px-2 bg-[#121620] rounded-t-2xl border-t border-x border-[#2A2F3A] flex-shrink-0">
+      {/* Laptop Screen Bezel */}
+      <div className="relative bg-[#0A0D14] rounded-t-xl overflow-hidden border border-[#1E2330] shadow-inner">
+        {/* Laptop Top Browser Bar (with Badge in horizontal space) */}
+        <div className="h-7 bg-[#161B26] px-3 flex items-center justify-between border-b border-[#232938]">
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <span className="w-2 h-2 rounded-full bg-[#FF5F56]/80 inline-block" />
+            <span className="w-2 h-2 rounded-full bg-[#FFBD2E]/80 inline-block" />
+            <span className="w-2 h-2 rounded-full bg-[#27C93F]/80 inline-block" />
           </div>
-          {/* Badge */}
-          {project.badge && (
+
+          {/* Subtle camera lens indicator */}
+          <span className="w-1.5 h-1.5 rounded-full bg-[#2A3142] hidden sm:inline-block" />
+
+          {/* Badge moved to top bar horizontal space */}
+          {badge ? (
             <span
-              className="absolute top-3 right-3 text-xs font-heading font-semibold px-2.5 py-1 rounded-full"
+              className="text-[10px] font-heading font-semibold px-2.5 py-0.5 rounded-md flex items-center gap-1 shadow-sm"
               style={{
-                background: 'rgba(232,163,61,0.2)',
-                color: '#E8A33D',
-                border: '1px solid rgba(232,163,61,0.3)',
+                background: `${badgeColor || '#E8A33D'}22`,
+                color: badgeColor || '#E8A33D',
+                border: `1px solid ${badgeColor || '#E8A33D'}44`,
               }}
             >
-              {project.badge}
+              <CheckCircle2 size={10} />
+              {badge}
             </span>
+          ) : (
+            <div className="w-6" />
           )}
-          {/* Bottom fade */}
-          <div className="project-img-overlay absolute inset-0" />
         </div>
 
-        {/* Card body */}
-        <div className="flex flex-col flex-1 p-5 gap-3">
-          {/* Title + tagline */}
-          <div>
-            <h3
-              className="font-heading font-bold text-lg leading-tight"
-              style={{ color: '#F3EFE7', letterSpacing: '-0.01em' }}
-            >
-              {project.title}
-            </h3>
-            <p className="text-xs font-medium mt-0.5" style={{ color: '#E8A33D' }}>
-              {project.tagline}
-            </p>
-          </div>
-
-          {/* Description */}
-          <p
-            className="text-sm leading-relaxed flex-1"
-            style={{ color: '#A6ADBB', lineHeight: 1.7 }}
-          >
-            {project.description}
-          </p>
-
-          {/* Stack chips */}
-          <div className="flex flex-wrap gap-1.5">
-            {project.stack.map(tech => (
-              <span key={tech} className="tag-chip text-xs">
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          {/* ── Action buttons row ── */}
-          <div
-            className="flex items-center gap-2 mt-1 pt-3"
-            style={{ borderTop: '1px solid #2A2F3A' }}
-          >
-            {/* GitHub icon button */}
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-btn flex-shrink-0"
-              aria-label={`${project.title} GitHub repository`}
-              style={{ width: '36px', height: '36px' }}
-            >
-              <Github size={15} />
-            </a>
-
-            {/* Live Demo — full-width pill button if URL exists, placeholder if not */}
-            {project.live ? (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-heading font-semibold transition-all duration-200"
+        {/* Laptop Screen Display (16:10 standard laptop aspect ratio) - whole image fully visible */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#07090E] flex items-center justify-center p-0.5">
+          {image && !imageFailed ? (
+            <img
+              src={image}
+              alt={`${title} thumbnail`}
+              className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              loading="lazy"
+              onError={() => setImageFailed(true)}
+            />
+          ) : (
+            /* Clean drop-in placeholder when user hasn't added the screenshot yet */
+            <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-[#121622] to-[#0A0D14]">
+              <div
+                className="w-11 h-11 rounded-xl flex items-center justify-center mb-2 border"
                 style={{
-                  background: 'rgba(232,163,61,0.12)',
-                  color: '#E8A33D',
-                  border: '1px solid rgba(232,163,61,0.3)',
-                }}
-                aria-label={`${project.title} Live Demo`}
-                onMouseEnter={e => {
-                  ; (e.currentTarget as HTMLElement).style.background = '#E8A33D'
-                    ; (e.currentTarget as HTMLElement).style.color = '#0B0E14'
-                }}
-                onMouseLeave={e => {
-                  ; (e.currentTarget as HTMLElement).style.background = 'rgba(232,163,61,0.12)'
-                    ; (e.currentTarget as HTMLElement).style.color = '#E8A33D'
+                  background: `${badgeColor || '#E8A33D'}15`,
+                  borderColor: `${badgeColor || '#E8A33D'}35`,
+                  color: badgeColor || '#E8A33D',
                 }}
               >
-                <ExternalLink size={13} />
-                Live Demo
-              </a>
-            ) : (
-              <span
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-heading font-medium"
-                style={{
-                  background: '#1A1E27',
-                  color: '#2A2F3A',
-                  border: '1px solid #2A2F3A',
-                }}
-              >
-                <ExternalLink size={13} />
-                Demo coming soon
-              </span>
-            )}
-          </div>
+                <Laptop size={20} />
+              </div>
+              <p className="text-xs font-heading font-semibold text-[#F3EFE7] tracking-wide">
+                {title}
+              </p>
+              <p className="text-[11px] text-[#6B7280] mt-1 font-mono">
+                {image ? image.replace('/projects/', '') : 'Add screenshot in public/projects/'}
+              </p>
+            </div>
+          )}
         </div>
-      </motion.div>
+      </div>
+
+      {/* Laptop Hinge / Lower Lip */}
+      <div className="h-1.5 w-full bg-[#1A1F2C] border-t border-[#262D3D] rounded-b-sm flex items-center justify-center">
+        <div className="w-10 h-0.5 bg-[#0B0E14] rounded-full opacity-60" />
+      </div>
     </div>
   )
 }
 
 /* --------------------------------------------------------
-   Projects Section with Embla Carousel
-   — Auto-scrolls right-to-left every 3 seconds
-   — Pauses on hover/touch, resumes on leave
+   Unified Project Card
+   Standard structure across every project:
+   - Laptop mockup with thumbnail
+   - Title & tagline
+   - Structured bullet points
+   - Clickable tech stack (7 initial + clickable "+N more" to expand)
+   - Exactly TWO action buttons: Source Code (Github) + Live Link
 -------------------------------------------------------- */
-export default function Projects() {
-  // 3000ms = 3-second interval as requested
-  const autoplay = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true, rootNode: (emblaRoot) => emblaRoot.parentElement })
+function ProjectCard({ project }: { project: Project }) {
+  const [showAllStack, setShowAllStack] = useState(false)
+  const INITIAL_STACK_COUNT = 7
+
+  const visibleStack = showAllStack
+    ? project.stack
+    : project.stack.slice(0, INITIAL_STACK_COUNT)
+  const remainingCount = project.stack.length - INITIAL_STACK_COUNT
+
+  return (
+    <div className="card overflow-hidden flex flex-col h-full group transition-all duration-300 hover:border-amber-500/40">
+      {/* Laptop Frame Mockup */}
+      <LaptopMockup
+        image={project.image}
+        title={project.title}
+        badge={project.badge}
+        badgeColor={project.badgeColor}
+      />
+
+      {/* Card Body */}
+      <div className="flex flex-col flex-1 p-5 gap-3">
+        {/* Title + Tagline */}
+        <div>
+          <h3
+            className="font-heading font-bold text-lg leading-tight transition-colors duration-200 group-hover:text-amber-400"
+            style={{ color: '#F3EFE7', letterSpacing: '-0.01em' }}
+          >
+            {project.title}
+          </h3>
+          <p className="text-xs font-medium mt-1" style={{ color: '#E8A33D' }}>
+            {project.tagline}
+          </p>
+        </div>
+
+        {/* Structured Bullets (or fallback description) */}
+        {project.bullets ? (
+          <ul className="space-y-1.5 text-xs text-[#A6ADBB] leading-relaxed my-1 flex-1">
+            {project.bullets.map((b, idx) => {
+              const parts = b.split(': ')
+              const hasPrefix = parts.length > 1
+              return (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5 flex-shrink-0 text-[11px]">▹</span>
+                  <span>
+                    {hasPrefix ? (
+                      <>
+                        <strong className="text-[#F3EFE7] font-semibold">
+                          {parts[0]}:{' '}
+                        </strong>
+                        <span>{parts.slice(1).join(': ')}</span>
+                      </>
+                    ) : (
+                      b
+                    )}
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+        ) : (
+          <p
+            className="text-xs sm:text-sm leading-relaxed flex-1"
+            style={{ color: '#A6ADBB', lineHeight: 1.65 }}
+          >
+            {project.description}
+          </p>
+        )}
+
+        {/* Tech Stack Chips: initially 7, then clickable "+N more" to expand */}
+        <div className="flex flex-wrap gap-1.5 pt-1 items-center">
+          {visibleStack.map(tech => (
+            <span key={tech} className="tag-chip text-[11px] py-0.5 px-2">
+              {tech}
+            </span>
+          ))}
+          {project.stack.length > INITIAL_STACK_COUNT && (
+            <button
+              type="button"
+              onClick={e => {
+                e.stopPropagation()
+                setShowAllStack(prev => !prev)
+              }}
+              className="text-[11px] font-heading font-semibold text-amber-400/90 hover:text-amber-300 py-0.5 px-2 rounded bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 transition-all cursor-pointer"
+              aria-label={
+                showAllStack
+                  ? 'Show fewer technologies'
+                  : `Show ${remainingCount} more technologies`
+              }
+            >
+              {showAllStack ? 'Show less' : `+${remainingCount} more`}
+            </button>
+          )}
+        </div>
+
+        {/* EXACTLY TWO Action Buttons: Source Code (GitHub icon) & Live Link */}
+        <div className="flex items-center gap-2 mt-auto pt-3 border-t border-[#2A2F3A]">
+          {/* 1. Source Code */}
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-heading font-semibold transition-all duration-200 border border-[#2A2F3A] bg-[#12161F] text-[#A6ADBB] hover:text-[#F3EFE7] hover:border-amber-400/40 hover:bg-[#1A1F2B]"
+            aria-label={`${project.title} Source Code`}
+          >
+            <Github size={14} />
+            <span>Source Code</span>
+          </a>
+
+          {/* 2. Live Link */}
+          <a
+            href={project.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-heading font-semibold transition-all duration-200 border border-amber-500/30 bg-amber-500/10 text-[#E8A33D] hover:bg-[#E8A33D] hover:text-[#0B0E14] hover:shadow-[0_0_16px_rgba(232,163,61,0.35)]"
+            aria-label={`${project.title} Live Link`}
+          >
+            <ExternalLink size={13} />
+            <span>Live Link</span>
+          </a>
+        </div>
+      </div>
+    </div>
   )
+}
+
+/* --------------------------------------------------------
+   Reusable Horizontal Sliding Carousel
+   - Auto-scrolls smoothly every 3.5 seconds
+   - Pause on hover / touch
+   - Snappy drag & swipe
+   - Arrow navigation & pagination dots
+-------------------------------------------------------- */
+function ProjectCarousel({
+  items,
+  sectionId,
+}: {
+  items: Project[]
+  sectionId: string
+}) {
+  const autoplay = useRef(
+    Autoplay({
+      delay: 3500,
+      stopOnInteraction: true,
+      rootNode: emblaRoot => emblaRoot.parentElement,
+    })
+  )
+
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
       align: 'start',
-      dragFree: false,           // snappy snapping, not free drag (better for mobile)
-      containScroll: 'trimSnaps', // prevents partial cards at edges on mobile
+      dragFree: false,
+      containScroll: 'trimSnaps',
     },
     [autoplay.current]
   )
+
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
 
@@ -282,22 +435,95 @@ export default function Projects() {
     setScrollSnaps(emblaApi.scrollSnapList())
     emblaApi.on('select', onSelect)
     onSelect()
-    return () => { emblaApi.off('select', onSelect) }
+    return () => {
+      emblaApi.off('select', onSelect)
+    }
   }, [emblaApi, onSelect])
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
-  const { ref: headingRef, inView: headingInView } = useInView({ threshold: 0.1, triggerOnce: true })
+  return (
+    <div className="relative">
+      {/* Controls Bar for this Carousel */}
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-xs text-[#8E96A4]">
+          Swipe or drag to browse · Auto-scrolls · Hover to pause
+        </p>
+        <div className="flex items-center gap-2">
+          <button
+            id={`${sectionId}-prev`}
+            onClick={scrollPrev}
+            className="social-btn"
+            style={{ width: '36px', height: '36px' }}
+            aria-label="Previous slide"
+          >
+            <ChevronLeft size={16} />
+          </button>
+          <button
+            id={`${sectionId}-next`}
+            onClick={scrollNext}
+            className="social-btn"
+            style={{ width: '36px', height: '36px' }}
+            aria-label="Next slide"
+          >
+            <ChevronRight size={16} />
+          </button>
+        </div>
+      </div>
+
+      {/* Embla Carousel Viewport */}
+      <div
+        className="embla overflow-hidden -mx-2 px-2 py-2"
+        ref={emblaRef}
+        onMouseEnter={() => autoplay.current.stop()}
+        onMouseLeave={() => autoplay.current.play()}
+      >
+        <div className="embla__container flex gap-5">
+          {items.map(project => (
+            <div
+              key={project.id}
+              className="embla__slide w-[88vw] sm:w-[380px] md:w-[420px] lg:w-[460px] flex-shrink-0"
+            >
+              <ProjectCard project={project} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Dot Indicators */}
+      <div className="flex justify-center items-center gap-2 mt-6">
+        {scrollSnaps.map((_, i) => (
+          <button
+            key={i}
+            id={`${sectionId}-dot-${i}`}
+            className={`embla-dot transition-all duration-300 ${i === selectedIndex ? 'embla-dot--active' : ''
+              }`}
+            onClick={() => emblaApi?.scrollTo(i)}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* --------------------------------------------------------
+   Main Projects Section Component
+-------------------------------------------------------- */
+export default function Projects() {
+  const { ref: headingRef, inView: headingInView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  })
 
   return (
     <div className="section-padding" style={{ backgroundColor: '#0B0E14' }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-
-        {/* Section header */}
+        {/* Section Header */}
         <motion.div
           ref={headingRef}
-          className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+          className="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
@@ -305,63 +531,36 @@ export default function Projects() {
           <div>
             <p className="kicker mb-3">( 03 ) PROJECTS</p>
             <h2 className="section-heading">
-              Things I've <span className="text-amber-gradient">actually built</span>
+              Featured Projects &{' '}
+              <span className="text-amber-gradient">Engineering Work</span>
             </h2>
             <p className="mt-2 text-sm" style={{ color: '#A6ADBB' }}>
-              Drag or use arrows to browse
+              Microservices platforms, full-stack systems, internship deliverables, and hackathon architectures.
             </p>
-          </div>
-
-          {/* Arrow controls */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <button
-              id="projects-prev"
-              onClick={scrollPrev}
-              className="social-btn"
-              aria-label="Previous project"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              id="projects-next"
-              onClick={scrollNext}
-              className="social-btn"
-              aria-label="Next project"
-            >
-              <ChevronRight size={18} />
-            </button>
           </div>
         </motion.div>
 
-        {/* Carousel wrapper — overflow hidden clips cards neatly on mobile */}
-        <div
-          className="embla"
-          ref={emblaRef}
-          onMouseEnter={() => autoplay.current.stop()}
-          onMouseLeave={() => autoplay.current.play()}
-          style={{ overflow: 'hidden' }}
-        >
-          <div className="embla__container py-4" style={{ gap: '20px' }}>
-            {projects.map(project => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
+        {/* Main Projects Horizontal Slider */}
+        <div className="mb-14">
+          <ProjectCarousel items={mainProjects} sectionId="featured-projects" />
+        </div>
+
+        {/* Other Projects Section with Horizontal Slider */}
+        <div className="pt-8 border-t border-[#1E2330]">
+          <div className="mb-4">
+            <h3
+              className="font-heading font-semibold text-lg"
+              style={{ color: '#F3EFE7' }}
+            >
+              Other Projects & Experiments
+            </h3>
+            <p className="text-xs text-[#8E96A4] mt-0.5">
+              Production web applications, mobile task managers, and computer vision systems.
+            </p>
           </div>
-        </div>
 
-        {/* Dot indicators */}
-        <div className="flex justify-center items-center gap-2 mt-8">
-          {scrollSnaps.map((_, i) => (
-            <button
-              key={i}
-              id={`project-dot-${i}`}
-              className={`embla-dot transition-all duration-300 ${i === selectedIndex ? 'embla-dot--active' : ''
-                }`}
-              onClick={() => emblaApi?.scrollTo(i)}
-              aria-label={`Go to project ${i + 1}`}
-            />
-          ))}
+          <ProjectCarousel items={otherProjects} sectionId="other-projects" />
         </div>
-
       </div>
     </div>
   )
